@@ -14,6 +14,7 @@
 		213D8A311CD4BF8100B4FDB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213D8A2F1CD4BF8100B4FDB6 /* LaunchScreen.storyboard */; };
 		213D8A3C1CD4BF8100B4FDB6 /* LocationPickerControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D8A3B1CD4BF8100B4FDB6 /* LocationPickerControllerTests.swift */; };
 		213D8A471CD4BF8100B4FDB6 /* LocationPickerControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D8A461CD4BF8100B4FDB6 /* LocationPickerControllerUITests.swift */; };
+		213D8A561CD5781C00B4FDB6 /* LocationPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D8A551CD5781C00B4FDB6 /* LocationPickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		213D8A421CD4BF8100B4FDB6 /* LocationPickerControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationPickerControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D8A461CD4BF8100B4FDB6 /* LocationPickerControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerControllerUITests.swift; sourceTree = "<group>"; };
 		213D8A481CD4BF8100B4FDB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		213D8A551CD5781C00B4FDB6 /* LocationPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPickerController.swift; path = LocationPickerController/LocationPickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				213D8A251CD4BF8100B4FDB6 /* LocationPickerController */,
+				213D8A541CD577FA00B4FDB6 /* Lib */,
 				213D8A3A1CD4BF8100B4FDB6 /* LocationPickerControllerTests */,
 				213D8A451CD4BF8100B4FDB6 /* LocationPickerControllerUITests */,
 				213D8A241CD4BF8100B4FDB6 /* Products */,
@@ -123,6 +126,14 @@
 				213D8A481CD4BF8100B4FDB6 /* Info.plist */,
 			);
 			path = LocationPickerControllerUITests;
+			sourceTree = "<group>";
+		};
+		213D8A541CD577FA00B4FDB6 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				213D8A551CD5781C00B4FDB6 /* LocationPickerController.swift */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			files = (
 				213D8A291CD4BF8100B4FDB6 /* ViewController.swift in Sources */,
 				213D8A271CD4BF8100B4FDB6 /* AppDelegate.swift in Sources */,
+				213D8A561CD5781C00B4FDB6 /* LocationPickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
