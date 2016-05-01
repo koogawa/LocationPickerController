@@ -36,7 +36,7 @@ class LocationPickerController: UIViewController {
     var success: successClosure?
     var failure: failureClosure?
 
-    var isInitialized: Bool = false
+    private var isInitialized: Bool = false
 
     init(success: successClosure, failure: failureClosure? = nil) {
         self.success = success
