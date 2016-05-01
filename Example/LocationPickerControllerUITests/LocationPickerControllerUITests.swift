@@ -8,6 +8,8 @@
 
 import XCTest
 
+@available(iOS 9.0, *)
+
 class LocationPickerControllerUITests: XCTestCase {
         
     override func setUp() {
@@ -31,6 +33,16 @@ class LocationPickerControllerUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCUIDevice.sharedDevice().orientation = .Portrait
+        
+        let app = XCUIApplication()
+        let selectLocationButton = app.buttons["Select Location"]
+        selectLocationButton.tap()
+
+        let locationpickerNavigationBar = app.navigationBars["LocationPicker"]
+        locationpickerNavigationBar.buttons["Done"].tap()
+        selectLocationButton.tap()
+        locationpickerNavigationBar.buttons["Cancel"].tap()
     }
     
 }

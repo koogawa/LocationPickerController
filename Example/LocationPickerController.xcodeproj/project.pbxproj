@@ -48,7 +48,7 @@
 		213D8A421CD4BF8100B4FDB6 /* LocationPickerControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationPickerControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D8A461CD4BF8100B4FDB6 /* LocationPickerControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerControllerUITests.swift; sourceTree = "<group>"; };
 		213D8A481CD4BF8100B4FDB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		213D8A551CD5781C00B4FDB6 /* LocationPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPickerController.swift; path = LocationPickerController/LocationPickerController.swift; sourceTree = "<group>"; };
+		213D8A551CD5781C00B4FDB6 /* LocationPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationPickerController.swift; path = ../LocationPickerController/LocationPickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +498,7 @@
 				213D8A4D1CD4BF8100B4FDB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		213D8A4E1CD4BF8100B4FDB6 /* Build configuration list for PBXNativeTarget "LocationPickerControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +507,7 @@
 				213D8A501CD4BF8100B4FDB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		213D8A511CD4BF8100B4FDB6 /* Build configuration list for PBXNativeTarget "LocationPickerControllerUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +516,7 @@
 				213D8A531CD4BF8100B4FDB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
