@@ -25,7 +25,7 @@ extension UIBarButtonItem {
 typealias successClosure = (CLLocationCoordinate2D) -> Void
 typealias failureClosure = (NSError) -> Void
 
-class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class LocationPickerController: UIViewController {
 
     var mapView: MKMapView!
     var pointAnnotation: MKPointAnnotation!
@@ -86,8 +86,11 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    // MARK: - Internal methods
+// MARK: - Internal methods
+
+internal extension LocationPickerController {
 
     func didTapCancelButton() {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -96,8 +99,8 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
     func didTapDoneButton() {
         guard CLLocationCoordinate2DIsValid(self.mapView.centerCoordinate) else {
             self.failure?(NSError(domain: "LocationPickerControllerErrorDomain",
-                                  code: 0,
-                                  userInfo: ["Reason": "Invalid coordinate"]))
+                code: 0,
+                userInfo: ["Reason": "Invalid coordinate"]))
             return
         }
 
@@ -110,24 +113,31 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
         self.mapView.setCenterCoordinate(self.mapView.userLocation.coordinate, animated: true)
         self.currentButton.enabled = false
     }
+}
 
-    // MARK: - MKMapView delegate
+// MARK: - MKMapView delegate
 
+extension LocationPickerController: MKMapViewDelegate {
+    
     func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
         self.currentButton.enabled = true
     }
-
+    
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
         self.pointAnnotation.coordinate = mapView.region.center
     }
+}
 
-    // MARK: - CLLocationManager delegate
+
+// MARK: - CLLocationManager delegate
+
+extension LocationPickerController: CLLocationManagerDelegate {
 
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
