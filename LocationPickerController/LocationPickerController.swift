@@ -38,7 +38,7 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
 
     var isInitialized: Bool = false
 
-    init(success: successClosure, failure: failureClosure?) {
+    init(success: successClosure, failure: failureClosure? = nil) {
         self.success = success
         self.failure = failure
         super.init(nibName: nil, bundle: nil)
