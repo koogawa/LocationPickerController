@@ -3,7 +3,7 @@
 //  LocationPickerController
 //
 //  Created by koogawa on 2016/04/30.
-//  Copyright © 2016年 koogawa. All rights reserved.
+//  Copyright © 2016 koogawa. All rights reserved.
 //
 
 import UIKit

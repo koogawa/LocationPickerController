@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -23,8 +24,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func didTapSelectLocationButton(sender: AnyObject) {
-        print(1)
+        let viewController = LocationPickerController(success: {
+            [weak self] (coordinate: CLLocationCoordinate2D) -> Void in
+            self?.locationLabel.text = "".stringByAppendingFormat("%.4f, %.4f",
+                coordinate.latitude, coordinate.longitude)
+            },
+                                                      failure: nil)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
-
 }
 
