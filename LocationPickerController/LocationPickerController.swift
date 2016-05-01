@@ -25,30 +25,34 @@ extension UIBarButtonItem {
 typealias successClosure = (CLLocationCoordinate2D) -> Void
 typealias failureClosure = (NSError) -> Void
 
-class LocationPickerController: UIViewController {
+public class LocationPickerController: UIViewController {
 
-    var mapView: MKMapView!
-    var pointAnnotation: MKPointAnnotation!
-    var currentButton: UIBarButtonItem!
+    private var mapView: MKMapView!
+    private var pointAnnotation: MKPointAnnotation!
+    private var currentButton: UIBarButtonItem!
 
-    let locationManager: CLLocationManager = CLLocationManager()
+    private let locationManager: CLLocationManager = CLLocationManager()
 
-    var success: successClosure?
-    var failure: failureClosure?
+    private var success: successClosure?
+    private var failure: failureClosure?
 
     private var isInitialized: Bool = false
 
-    init(success: successClosure, failure: failureClosure? = nil) {
-        self.success = success
-        self.failure = failure
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    convenience init(success: successClosure, failure: failureClosure? = nil) {
+        self.init()
+        self.success = success
+        self.failure = failure
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func loadView() {
+    override public func loadView() {
         super.loadView()
 
         self.mapView = MKMapView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
@@ -58,7 +62,7 @@ class LocationPickerController: UIViewController {
         self.view.addSubview(self.mapView)
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel,
@@ -82,7 +86,7 @@ class LocationPickerController: UIViewController {
         self.locationManager.startUpdatingLocation()
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -119,14 +123,14 @@ internal extension LocationPickerController {
 
 extension LocationPickerController: MKMapViewDelegate {
     
-    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    public func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
         self.currentButton.enabled = true
     }
     
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    public func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
@@ -139,7 +143,7 @@ extension LocationPickerController: MKMapViewDelegate {
 
 extension LocationPickerController: CLLocationManagerDelegate {
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .NotDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -150,7 +154,7 @@ extension LocationPickerController: CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+    public func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         guard !self.isInitialized else {
             return
         }
