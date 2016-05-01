@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import CoreLocation
+
 @testable import LocationPickerController
 
 class LocationPickerControllerTests: XCTestCase {
@@ -24,6 +26,15 @@ class LocationPickerControllerTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let viewController = LocationPickerController(success: {
+            (coordinate: CLLocationCoordinate2D) -> Void in
+            XCTAssertNotNil(coordinate)
+            },
+                                                      failure: {
+                                                        (error: NSError) -> Void in
+                                                        XCTAssertNotNil(error)
+        })
+        XCTAssertNotNil(viewController)
     }
     
     func testPerformanceExample() {
@@ -32,5 +43,5 @@ class LocationPickerControllerTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
 }
