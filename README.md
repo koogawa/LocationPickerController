@@ -6,10 +6,11 @@ Simple location picker with a built in maps. The selected item can be returned t
 
 ## Usage
 
-1. Link `CoreLocation.framework` and `MapKit.framework` to your project.
-2. Fill in `NSLocationWhenInUseUsageDescription` in your Info.plist.
-3. Initialise the LocationPickerController
-4. Push the controller
+1. Link `CoreLocation.framework` and `MapKit.framework` to your project
+2. Fill in `NSLocationWhenInUseUsageDescription` in your Info.plist
+3. Import `CoreLocation` and `LocationPickerController`
+4. Initialize the LocationPickerController
+5. Push the controller
 
 ```swift
 import CoreLocation
