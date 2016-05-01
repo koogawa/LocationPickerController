@@ -40,7 +40,7 @@ pod "LocationPickerController"
 
 ## Requirements
 
-KGWLocationPicker requires iOS 8.0 and above.
+LocationPickerController requires iOS 8.0 and above.
 
 ## Creator
 
