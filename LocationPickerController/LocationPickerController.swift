@@ -25,7 +25,7 @@ extension UIBarButtonItem {
 typealias successClosure = (CLLocationCoordinate2D) -> Void
 typealias failureClosure = (NSError) -> Void
 
-class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class LocationPickerController: UIViewController {
 
     var mapView: MKMapView!
     var pointAnnotation: MKPointAnnotation!
@@ -33,12 +33,12 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
 
     let locationManager: CLLocationManager = CLLocationManager()
 
-    var success: successClosure? = nil
-    var failure: failureClosure? = nil
+    var success: successClosure?
+    var failure: failureClosure?
 
-    var isInitialized: Bool = false
+    private var isInitialized: Bool = false
 
-    init(success: successClosure, failure: failureClosure?) {
+    init(success: successClosure, failure: failureClosure? = nil) {
         self.success = success
         self.failure = failure
         super.init(nibName: nil, bundle: nil)
@@ -86,8 +86,11 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    // MARK: - Internal methods
+// MARK: - Internal methods
+
+internal extension LocationPickerController {
 
     func didTapCancelButton() {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -95,17 +98,13 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
 
     func didTapDoneButton() {
         guard CLLocationCoordinate2DIsValid(self.mapView.centerCoordinate) else {
-            if let failure = self.failure {
-                failure(NSError(domain: "LocationPickerControllerErrorDomain",
-                    code: 0,
-                    userInfo: ["Reason": "Invalid coordinate"]))
-            }
+            self.failure?(NSError(domain: "LocationPickerControllerErrorDomain",
+                code: 0,
+                userInfo: ["Reason": "Invalid coordinate"]))
             return
         }
 
-        if let success = self.success {
-            success(self.mapView.centerCoordinate)
-        }
+        self.success?(self.mapView.centerCoordinate)
 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -114,24 +113,31 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
         self.mapView.setCenterCoordinate(self.mapView.userLocation.coordinate, animated: true)
         self.currentButton.enabled = false
     }
+}
 
-    // MARK: - MKMapView delegate
+// MARK: - MKMapView delegate
 
+extension LocationPickerController: MKMapViewDelegate {
+    
     func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
         self.currentButton.enabled = true
     }
-
+    
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
         self.pointAnnotation.coordinate = mapView.region.center
     }
+}
 
-    // MARK: - CLLocationManager delegate
+
+// MARK: - CLLocationManager delegate
+
+extension LocationPickerController: CLLocationManagerDelegate {
 
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {

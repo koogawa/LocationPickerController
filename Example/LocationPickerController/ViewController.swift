@@ -28,8 +28,7 @@ class ViewController: UIViewController {
             [weak self] (coordinate: CLLocationCoordinate2D) -> Void in
             self?.locationLabel.text = "".stringByAppendingFormat("%.4f, %.4f",
                 coordinate.latitude, coordinate.longitude)
-            },
-                                                      failure: nil)
+            })
         let navigationController = UINavigationController(rootViewController: viewController)
         self.presentViewController(navigationController, animated: true, completion: nil)
     }
