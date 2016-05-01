@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LocationPickerController"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Simple location picker with a built in maps."
 
   # This description is used to generate tags and improve search results.
@@ -80,7 +80,7 @@ Simple location picker with a built in maps. The selected item can be returned t
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/koogawa/LocationPickerController.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/koogawa/LocationPickerController.git", :tag => "1.0.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

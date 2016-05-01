@@ -22,8 +22,8 @@ extension UIBarButtonItem {
     }
 }
 
-typealias successClosure = (CLLocationCoordinate2D) -> Void
-typealias failureClosure = (NSError) -> Void
+public typealias successClosure = (CLLocationCoordinate2D) -> Void
+public typealias failureClosure = (NSError) -> Void
 
 public class LocationPickerController: UIViewController {
 
@@ -42,7 +42,7 @@ public class LocationPickerController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    convenience init(success: successClosure, failure: failureClosure? = nil) {
+    convenience public init(success: successClosure, failure: failureClosure? = nil) {
         self.init()
         self.success = success
         self.failure = failure
