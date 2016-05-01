@@ -33,8 +33,8 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
 
     let locationManager: CLLocationManager = CLLocationManager()
 
-    var success: successClosure? = nil
-    var failure: failureClosure? = nil
+    var success: successClosure?
+    var failure: failureClosure?
 
     var isInitialized: Bool = false
 
