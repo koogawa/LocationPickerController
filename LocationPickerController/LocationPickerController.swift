@@ -98,7 +98,7 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
             if let failure = self.failure {
                 failure(NSError(domain: "LocationPickerControllerErrorDomain",
                     code: 0,
-                    userInfo: ["Reason": "Invalid coordinate"]))
+                    userInfo: [NSLocalizedDescriptionKey: "Invalid coordinate"]))
             }
             return
         }
