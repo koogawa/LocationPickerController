@@ -12,6 +12,11 @@ Simple location picker with a built in maps. The selected item can be returned t
 4. Push the controller
 
 ```swift
+import CoreLocation
+import LocationPickerController
+```
+
+```swift
 let viewController = LocationPickerController(success: {
     [weak self] (coordinate: CLLocationCoordinate2D) -> Void in
     self?.locationLabel.text = "".stringByAppendingFormat("%.4f, %.4f",
