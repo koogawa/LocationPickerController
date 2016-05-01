@@ -95,17 +95,13 @@ class LocationPickerController: UIViewController, MKMapViewDelegate, CLLocationM
 
     func didTapDoneButton() {
         guard CLLocationCoordinate2DIsValid(self.mapView.centerCoordinate) else {
-            if let failure = self.failure {
-                failure(NSError(domain: "LocationPickerControllerErrorDomain",
-                    code: 0,
-                    userInfo: ["Reason": "Invalid coordinate"]))
-            }
+            self.failure?(NSError(domain: "LocationPickerControllerErrorDomain",
+                                  code: 0,
+                                  userInfo: ["Reason": "Invalid coordinate"]))
             return
         }
 
-        if let success = self.success {
-            success(self.mapView.centerCoordinate)
-        }
+        self.success?(self.mapView.centerCoordinate)
 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
