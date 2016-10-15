@@ -36,7 +36,7 @@ open class LocationPickerController: UIViewController {
     fileprivate var success: successClosure?
     fileprivate var failure: failureClosure?
 
-    fileprivate var isInitialized: Bool = false
+    fileprivate var isInitialized = false
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -154,8 +154,8 @@ extension LocationPickerController: CLLocationManagerDelegate {
         }
     }
 
-    public func locationManager(_ manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        guard !self.isInitialized else {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let newLocation = locations.last, !self.isInitialized else {
             return
         }
 
