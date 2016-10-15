@@ -80,7 +80,7 @@ Simple location picker with a built in maps. The selected item can be returned t
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/koogawa/LocationPickerController.git", :tag => "1.0.2" }
+  s.source       = { :git => "https://github.com/koogawa/LocationPickerController.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
