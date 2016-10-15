@@ -23,14 +23,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func didTapSelectLocationButton(sender: AnyObject) {
+    @IBAction func didTapSelectLocationButton(_ sender: AnyObject) {
         let viewController = LocationPickerController(success: {
             [weak self] (coordinate: CLLocationCoordinate2D) -> Void in
-            self?.locationLabel.text = "".stringByAppendingFormat("%.4f, %.4f",
+            self?.locationLabel.text = "".appendingFormat("%.4f, %.4f",
                 coordinate.latitude, coordinate.longitude)
             })
         let navigationController = UINavigationController(rootViewController: viewController)
-        self.presentViewController(navigationController, animated: true, completion: nil)
+        self.present(navigationController, animated: true, completion: nil)
     }
 }
 

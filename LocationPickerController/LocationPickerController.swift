@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 enum UIBarButtonHiddenItem: Int {
-    case Locate = 100
+    case locate = 100
     func convert() -> UIBarButtonSystemItem {
         return UIBarButtonSystemItem(rawValue: self.rawValue)!
     }
@@ -25,24 +25,24 @@ extension UIBarButtonItem {
 public typealias successClosure = (CLLocationCoordinate2D) -> Void
 public typealias failureClosure = (NSError) -> Void
 
-public class LocationPickerController: UIViewController {
+open class LocationPickerController: UIViewController {
 
-    private var mapView: MKMapView!
-    private var pointAnnotation: MKPointAnnotation!
-    private var currentButton: UIBarButtonItem!
+    fileprivate var mapView: MKMapView!
+    fileprivate var pointAnnotation: MKPointAnnotation!
+    fileprivate var currentButton: UIBarButtonItem!
 
-    private let locationManager: CLLocationManager = CLLocationManager()
+    fileprivate let locationManager: CLLocationManager = CLLocationManager()
 
-    private var success: successClosure?
-    private var failure: failureClosure?
+    fileprivate var success: successClosure?
+    fileprivate var failure: failureClosure?
 
-    private var isInitialized: Bool = false
+    fileprivate var isInitialized = false
 
     init() {
         super.init(nibName: nil, bundle: nil)
     }
 
-    convenience public init(success: successClosure, failure: failureClosure? = nil) {
+    convenience public init(success: @escaping successClosure, failure: failureClosure? = nil) {
         self.init()
         self.success = success
         self.failure = failure
@@ -52,41 +52,41 @@ public class LocationPickerController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    override public func loadView() {
+    override open func loadView() {
         super.loadView()
 
-        self.mapView = MKMapView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        self.mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
-        self.mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.mapView)
     }
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel,
+        let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                target: self,
                                                action: #selector(LocationPickerController.didTapCancelButton))
         self.navigationItem.leftBarButtonItem = cancelButtonItem
 
-        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .Done,
+        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                              target: self,
                                              action: #selector(LocationPickerController.didTapDoneButton))
         self.navigationItem.rightBarButtonItem = doneButtonItem
 
-        self.currentButton = UIBarButtonItem(barButtonHiddenItem: .Locate,
+        self.currentButton = UIBarButtonItem(barButtonHiddenItem: .locate,
                                              target: self,
                                              action: #selector(LocationPickerController.didTapCurrentButton))
-        self.currentButton.enabled = false
+        self.currentButton.isEnabled = false
         self.toolbarItems = [self.currentButton]
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.isToolbarHidden = false
 
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -97,7 +97,7 @@ public class LocationPickerController: UIViewController {
 internal extension LocationPickerController {
 
     func didTapCancelButton() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     func didTapDoneButton() {
@@ -110,12 +110,12 @@ internal extension LocationPickerController {
 
         self.success?(self.mapView.centerCoordinate)
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     func didTapCurrentButton() {
-        self.mapView.setCenterCoordinate(self.mapView.userLocation.coordinate, animated: true)
-        self.currentButton.enabled = false
+        self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
+        self.currentButton.isEnabled = false
     }
 }
 
@@ -123,14 +123,14 @@ internal extension LocationPickerController {
 
 extension LocationPickerController: MKMapViewDelegate {
     
-    public func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
-        self.currentButton.enabled = true
+        self.currentButton.isEnabled = true
     }
     
-    public func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
         }
@@ -143,19 +143,19 @@ extension LocationPickerController: MKMapViewDelegate {
 
 extension LocationPickerController: CLLocationManagerDelegate {
 
-    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .NotDetermined:
+        case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-        case .Restricted, .Denied:
+        case .restricted, .denied:
             break
-        case .Authorized, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             break
         }
     }
 
-    public func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        guard !self.isInitialized else {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let newLocation = locations.last, !self.isInitialized else {
             return
         }
 
