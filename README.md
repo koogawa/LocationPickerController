@@ -20,12 +20,11 @@ import LocationPickerController
 ```swift
 let viewController = LocationPickerController(success: {
     [weak self] (coordinate: CLLocationCoordinate2D) -> Void in
-    self?.locationLabel.text = "".stringByAppendingFormat("%.4f, %.4f",
+    self?.locationLabel.text = "".appendingFormat("%.4f, %.4f",
         coordinate.latitude, coordinate.longitude)
-    },
-                                              failure: nil)
+    })
 let navigationController = UINavigationController(rootViewController: viewController)
-self.presentViewController(navigationController, animated: true, completion: nil)
+self.present(navigationController, animated: true, completion: nil)
 ```
 
 ## Installation
@@ -40,7 +39,7 @@ pod "LocationPickerController"
 
 ## Requirements
 
-LocationPickerController requires iOS 8.0 and above.
+Swift 3.0 / iOS 8.0+
 
 ## Creator
 
