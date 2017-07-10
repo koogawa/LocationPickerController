@@ -29,7 +29,7 @@ open class LocationPickerController: UIViewController {
 
     fileprivate var mapView: MKMapView!
     fileprivate var pointAnnotation: MKPointAnnotation!
-    fileprivate var currentButton: UIBarButtonItem!
+    fileprivate var userTrackingButton: MKUserTrackingBarButtonItem!
 
     fileprivate let locationManager: CLLocationManager = CLLocationManager()
 
@@ -75,11 +75,10 @@ open class LocationPickerController: UIViewController {
                                              action: #selector(LocationPickerController.didTapDoneButton))
         self.navigationItem.rightBarButtonItem = doneButtonItem
 
-        self.currentButton = UIBarButtonItem(barButtonHiddenItem: .locate,
-                                             target: self,
-                                             action: #selector(LocationPickerController.didTapCurrentButton))
-        self.currentButton.isEnabled = false
-        self.toolbarItems = [self.currentButton]
+        let flexibleButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                             target: nil, action: nil)
+        self.userTrackingButton = MKUserTrackingBarButtonItem(mapView: self.mapView)
+        self.toolbarItems = [self.userTrackingButton, flexibleButton]
         self.navigationController?.isToolbarHidden = false
 
         self.locationManager.delegate = self
@@ -112,24 +111,12 @@ internal extension LocationPickerController {
 
         self.dismiss(animated: true, completion: nil)
     }
-
-    @objc func didTapCurrentButton() {
-        self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
-        self.currentButton.isEnabled = false
-    }
 }
 
 // MARK: - MKMapView delegate
 
 extension LocationPickerController: MKMapViewDelegate {
-    
-    public func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        guard self.isInitialized else {
-            return
-        }
-        self.currentButton.isEnabled = true
-    }
-    
+
     public func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         guard self.isInitialized else {
             return
