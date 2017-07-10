@@ -96,11 +96,11 @@ open class LocationPickerController: UIViewController {
 
 internal extension LocationPickerController {
 
-    func didTapCancelButton() {
+    @objc func didTapCancelButton() {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func didTapDoneButton() {
+    @objc func didTapDoneButton() {
         guard CLLocationCoordinate2DIsValid(self.mapView.centerCoordinate) else {
             self.failure?(NSError(domain: "LocationPickerControllerErrorDomain",
                 code: 0,
@@ -113,7 +113,7 @@ internal extension LocationPickerController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func didTapCurrentButton() {
+    @objc func didTapCurrentButton() {
         self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
         self.currentButton.isEnabled = false
     }
