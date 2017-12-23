@@ -33,7 +33,7 @@ class LocationPickerControllerUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCUIDevice.shared().orientation = .portrait
+        XCUIDevice.shared.orientation = .portrait
         
         let app = XCUIApplication()
         let selectLocationButton = app.buttons["Select Location"]
