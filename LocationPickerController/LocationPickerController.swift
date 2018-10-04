@@ -11,8 +11,8 @@ import MapKit
 
 enum UIBarButtonHiddenItem: Int {
     case locate = 100
-    func convert() -> UIBarButtonSystemItem {
-        return UIBarButtonSystemItem(rawValue: self.rawValue)!
+    func convert() -> UIBarButtonItem.SystemItem {
+        return UIBarButtonItem.SystemItem(rawValue: self.rawValue)!
     }
 }
 
@@ -149,8 +149,8 @@ extension LocationPickerController: CLLocationManagerDelegate {
         self.locationManager.stopUpdatingLocation()
 
         let centerCoordinate = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude)
-        let span = MKCoordinateSpanMake(0.005, 0.005)
-        let region = MKCoordinateRegionMake(centerCoordinate, span)
+        let span = MKCoordinateSpan.init(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: centerCoordinate, span: span)
         self.mapView.setRegion(region, animated: true)
 
         self.pointAnnotation = MKPointAnnotation()
