@@ -138,6 +138,8 @@ extension LocationPickerController: CLLocationManagerDelegate {
             break
         case .authorizedAlways, .authorizedWhenInUse:
             break
+        default:
+            break
         }
     }
 
