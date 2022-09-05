@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LocationPickerController"
-  s.version      = "2.2.0"
+  s.version      = "2.3.0"
   s.summary      = "Simple location picker with a built in maps."
 
   # This description is used to generate tags and improve search results.
@@ -65,7 +65,7 @@ Simple location picker with a built in maps. The selected item can be returned t
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "12.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
