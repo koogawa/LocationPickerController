@@ -39,7 +39,7 @@ pod "LocationPickerController"
 
 ## Requirements
 
-Swift 4.0 / iOS 8.0+
+Swift 5.0 / iOS 12.0+
 
 ## Creator
 
